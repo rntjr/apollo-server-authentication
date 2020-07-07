@@ -1,0 +1,30 @@
+scalar Date
+type User {
+id: ID!      
+name: String
+password: String!
+email: String!  
+active: Boolean  
+createAt: Date
+}
+
+type Query {
+  users: [User!]!
+  user(id: ID!): User
+}
+
+input UserInput{
+name: String
+password: String!
+email: String! 
+}
+
+type Mutation {
+  createUser(data: UserInput): User!
+  updateUser(id: ID!, data: UserInput!): User!
+  deleteUser(id: ID!): Boolean
+}
+
+type Subscription{
+  userAdded: User!
+}
