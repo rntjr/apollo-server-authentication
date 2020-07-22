@@ -1,0 +1,24 @@
+input SignIn{
+  username: String!
+  password: String!
+}
+
+input SignUp{
+  username: String!
+  password: String!
+  name: String!
+  email: String!
+}
+
+type Token{
+  token: String
+}
+
+type Query{
+  authentication: String
+}
+
+type Mutation{
+  signIn(data:SignIn!): Token!
+  signUp(data:SignUp!): Token!
+}

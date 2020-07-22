@@ -1,12 +1,16 @@
 type User {
   id: Int!
   email: String!
+  username:String!
+  password: String!
   name: String
 }
 
 input UserInput{
   email: String!
   name: String
+  username:String!
+  password: String!
 }
 
 type Query{

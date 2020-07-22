@@ -1,11 +1,9 @@
-import { ApolloServer, PubSub } from 'apollo-server'
+import { ApolloServer } from 'apollo-server'
 
-export default function startServer({ typeDefs, resolvers }) {
-  const pubsub = new PubSub()
-  const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    context: { pubsub }
-  })
-  server.listen().then(({ url }) => console.log(` Server started at ${url}`))
+// Export server
+export default function startServer({ typeDefs, resolvers, context }) {
+  // ApolloServer declaration
+  const server = new ApolloServer({ typeDefs, resolvers, context })
+  // Up server
+  server.listen().then(({ url }) => { console.log(`🚀  Server ready at ${url}`) })
 }

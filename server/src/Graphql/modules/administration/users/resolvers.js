@@ -1,11 +1,14 @@
+import { PubSub } from 'apollo-server'
 import { PrismaClient } from '@prisma/client'
+import bcrypt from 'bcrypt'
+const pubsub = new PubSub()
 const prisma = new PrismaClient()
 
 const USER_ADDED = 'USER_ADDED'
 
 export default {
   Query: {
-    users: async () => {
+    users: async (parent, data, context, info) => {
       return await prisma.user.findMany()
     },
     user: async (_, { id }) => {
@@ -17,8 +20,14 @@ export default {
     },
   },
   Mutation: {
-    createUser: async (_, { data }, { pubsub }) => {
-      const user = await prisma.user.create({ data: data })
+    createUser: async (_, { data }) => {
+      const password = await bcrypt.hashSync(data.password, 10)
+      const user = await prisma.user.create({
+        data: {
+          ...data,
+          password
+        }
+      })
       pubsub.publish(USER_ADDED, { userAdded: user });
       return user
     },
@@ -36,7 +45,7 @@ export default {
 
   Subscription: {
     userAdded: {
-      subscribe: (obj, args, { pubsub }) => pubsub.asyncIterator([USER_ADDED])
+      subscribe: () => pubsub.asyncIterator([USER_ADDED])
     }
   }
 }
