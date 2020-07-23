@@ -7,8 +7,8 @@ const prisma = new PrismaClient()
 
 export default {
   Query: {
-    authentication: (_, data, { user }, info) => {
-      if (!user) throw new AuthenticationError('You must be logged in')
+    authentication: (_, data, { token }, info) => {
+      if (!token) throw new AuthenticationError('You must be logged in')
       return 'You are authenticated!'
     }
   },
