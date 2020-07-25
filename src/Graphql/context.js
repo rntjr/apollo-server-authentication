@@ -7,7 +7,7 @@ const context = ({ req }) => {
   // try to retrieve a user with the token
   const token = getUser(tokenSplited)
   // add the user to the context
-  return { token };
+  return { token }
 }
 
 const getUser = token => {

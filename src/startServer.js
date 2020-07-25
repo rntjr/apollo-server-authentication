@@ -1,7 +1,7 @@
 import { ApolloServer } from 'apollo-server'
 
 // Export server
-export default function startServer({ typeDefs, resolvers, context }) {
+export default function startServer ({ typeDefs, resolvers, context }) {
   // ApolloServer declaration
   const server = new ApolloServer({ typeDefs, resolvers, context })
   // Up server

@@ -45,6 +45,6 @@ export default {
       })
       const token = auth.createToken(userQuery)
       return { token }
-    },
+    }
   }
 }

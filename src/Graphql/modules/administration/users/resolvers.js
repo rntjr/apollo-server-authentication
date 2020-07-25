@@ -17,7 +17,7 @@ export default {
           id: id
         }
       })
-    },
+    }
   },
   Mutation: {
     createUser: async (_, { data }) => {
@@ -28,7 +28,7 @@ export default {
           password
         }
       })
-      pubsub.publish(USER_ADDED, { userAdded: user });
+      pubsub.publish(USER_ADDED, { userAdded: user })
       return user
     },
     updateUser: async (_, { id, data }) => {
